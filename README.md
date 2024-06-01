@@ -1,39 +1,69 @@
-# Material UI - Vite.js example
+# Movie Library App 📽️
 
-## How to use
+[Image of your movie library app] 
 
-Download the example [or clone the repo](https://github.com/mui/material-ui):
+Discover, organize, and share your favorite films with this user-friendly web application.
 
-<!-- #default-branch-switch -->
+## Features
 
-```bash
-curl https://codeload.github.com/mui/material-ui/tar.gz/next | tar -xz --strip=2 material-ui-next/examples/material-ui-vite
-cd material-ui-vite
+- **User Authentication:** Securely sign in or sign up to access your personal movie lists.
+- **Powerful Movie Search:** Effortlessly find movies using the OMDb API (Open Movie Database).
+- **Personalized Lists:** Create public or private lists to categorize and share your movie recommendations.
+- **Intuitive Interface:** Enjoy a sleek design inspired by popular movie platforms.
+- **Secure and Scalable:** Built with React for the frontend and Firebase for robust backend services.
+
+## Tech Stack
+
+- **Frontend:** React, React Router, Axios (for API calls)
+- **Backend:** Firebase (Authentication, Firestore database, Cloud Functions - optional)
+- **API:** OMDb API (Open Movie Database)
+
+## Architecture Diagram
+```
++--------------------+      +------------------+       +--------------+
+| React Frontend    |       | Firebase Backend |       | OMDb API     |
++--------------------+      +------------------+       +--------------+
+|                    |      |                  |       |              |
+| - Auth components  |<---->| - Auth Service   |       |              |
+| - MovieSearch      |      | - Firestore DB   |       |              |
+| - MovieList        |<---->| - Cloud Functions|       |              |
+| - MyLists          |      |                  |       |              |
+| - ...              |      |                  |       |              |
+|                    |      |                  |       |              |
+| - omdbService.js   |<---->|                  |<----->| - Movie data |
+| - firebase.js      |      |                  |       |              |
+|                    |      |                  |       |              |
++--------------------+      +------------------+       +--------------+
+
 ```
 
-Install it and run:
-
-```bash
-npm install
-npm run dev
+## Folder Structure
 ```
-
-or:
-
-<!-- #default-branch-switch -->
-
-[![Edit on StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/mui/material-ui/tree/next/examples/material-ui-vite)
-
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/mui/material-ui/tree/next/examples/material-ui-vite)
-
-## The idea behind the example
-
-This example uses [Vite.js](https://github.com/vitejs/vite).
-It includes `@mui/material` and its peer dependencies, including [Emotion](https://emotion.sh/docs/introduction), the default style engine in Material UI v5.
-
-## What's next?
-
-<!-- #default-branch-switch -->
-
-You now have a working example project.
-You can head back to the documentation and continue by browsing the [templates](https://next.mui.com/material-ui/getting-started/templates/) section.
+movie-library-app/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/ 
+│   │   ├── Auth/                   # Authentication components (SignIn, SignUp)
+│   │   ├── MovieCard/             # Displays details of a movie
+│   │   ├── MovieList/             # Displays a list of movies
+│   │   ├── MovieSearch/           # Search bar component
+│   │   ├── MyLists/               # Displays user's created movie lists
+│   │   └── shared/                # Reusable components (Header, Footer, etc.)
+│   ├── context/                   # Global state management (AuthContext)
+│   ├── firebase/                 # Firebase configuration and initialization
+│   ├── pages/                    # Main app pages
+│   │   ├── Home/                 # Home screen with search and lists
+│   │   ├── ListDetail/           # Details of a specific movie list
+│   │   ├── SignIn/               # Sign in page
+│   │   └── SignUp/               # Sign up page
+│   ├── services/                 # API requests (OMDB API, Firebase)
+│   │   ├── omdbService.js        # OMDB API service
+│   │   └── firebaseService.js    # Firebase service (CRUD operations on lists)
+│   ├── App.js
+│   └── index.js
+├── .env.local                   # Environment variables
+├── firebase.json                # Firebase configuration
+├── package.json
+└── README.md
+```
