@@ -12,7 +12,6 @@ import getLPTheme from './getLPTheme';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Divider from '@mui/material/Divider';
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import Hero from './sections/Hero';
 import SearchMovies from './components/SearchMovies';
 import { AuthContextProvider } from './context/AuthContext'
