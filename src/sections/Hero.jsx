@@ -12,6 +12,7 @@ function Hero() {
         backgroundPosition: 'center',
         height: '100vh',
         position: 'relative',
+        mb: 2,
     };
 
     const overlayStyles = {

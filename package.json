@@ -11,8 +11,12 @@
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@mui/material": "next",
+    "firebase": "^10.12.2",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-google-button": "^0.8.0",
+    "react-router-dom": "^6.23.1",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "latest",

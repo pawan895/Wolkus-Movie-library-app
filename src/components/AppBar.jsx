@@ -6,18 +6,22 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
 import {
-    AppBar,
-    Toolbar,
-    Typography,
-    IconButton,
-    Button,
-    useMediaQuery,
-    useTheme,
-    InputBase,
-    Container,
-    Box,
-  } from '@mui/material';
-  import { Search as SearchIcon } from '@mui/icons-material';
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button,
+  useMediaQuery,
+  useTheme,
+  InputBase,
+  Container,
+  Box,
+} from '@mui/material';
+import { NoEncryption, Search as SearchIcon } from '@mui/icons-material';
+import SignInModal from '../modals/SignInModal';
+import SignUpModal from '../modals/SignUpModal';
+import { UserAuth } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 
 const logoStyle = {
@@ -29,6 +33,15 @@ const logoStyle = {
 function AppAppBar({ mode, toggleColorMode }) {
   const [open, setOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
+  const [signInOpen, setSignInOpen] = React.useState(false);
+  const [signUpOpen, setSignUpOpen] = React.useState(false);
+  const { user, logOut } = UserAuth();
+
+  // console.log(user.displayName);
+  if (user) {
+    console.log(user.displayName);
+  }
+
 
 
   const toggleDrawer = (newOpen) => () => {
@@ -53,6 +66,29 @@ function AppAppBar({ mode, toggleColorMode }) {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
     // You can trigger your search logic here
+  };
+
+  const handleModal = (modalType) => {
+    if (modalType === 'signin') {
+      setSignInOpen(true);
+    } else if (modalType === 'signup') {
+      setSignUpOpen(true);
+    }
+
+  };
+
+  const handleSignOut = async (logOut) => {
+    try {
+
+
+      await logOut();
+
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   return (
@@ -98,8 +134,8 @@ function AppAppBar({ mode, toggleColorMode }) {
                 px: 0,
               }}
             >
-              <Typography variant = "body1" color="text.primary"
-              sx={{p: 2, fontWeight: "bold", fontSize: '1.2rem'}}> Wolkus</Typography>
+              <Typography variant="body1" color="text.primary"
+                sx={{ p: 2, fontWeight: "bold", fontSize: '1.2rem' }}> Wolkus</Typography>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
                   onClick={() => scrollToSection('Home')}
@@ -133,13 +169,12 @@ function AppAppBar({ mode, toggleColorMode }) {
                     FAQ
                   </Typography>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('Hire Me')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Hire Me !
-                  </Typography>
+                <MenuItem sx={{ py: '6px', px: '12px' }}>
+                  <a href='https://pawandevelops.me/' target='_blank' style={{ textDecoration: 'none', }}>
+                    <Typography variant="body2" color="text.primary">
+                      Hire Me !
+                    </Typography>
+                  </a>
                 </MenuItem>
               </Box>
             </Box>
@@ -168,100 +203,137 @@ function AppAppBar({ mode, toggleColorMode }) {
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-              <Button
-                color="primary"
-                variant="text"
-                size="small"
-                component="a"
-                onClick={() => scrollToSection('Home')}
-              >
-                Sign in
-              </Button>
-              <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                component="a"
-                onClick={() => scrollToSection('Home')}
 
+              {!user ? (
+                <Box>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    size="small"
+                    component="a"
+                    onClick={() => handleModal('signin')}
+                  >
+                    Sign in
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    component="a"
+                    onClick={() => handleModal('signup')}
+
+                  >
+                    Sign up
+                  </Button>
+
+                </Box>) :
+
+                (
+                <Box sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: 2,
+                  alignItems: 'center',
+                }}>
+                <Typography variant="body2" color="text.primary">{user.displayName}
+                </Typography>
+                 <Button
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                  component="a"
+                  onClick={() => handleSignOut(logOut)}
+
+                >
+                  Log out
+                </Button>
+                </Box>
+               )}
+
+          </Box>
+
+
+
+          <SignInModal open={signInOpen} onClose={() => setSignInOpen(false)} />
+          <SignUpModal open={signUpOpen} onClose={() => setSignUpOpen(false)} />
+          <Box sx={{ display: { sm: '', md: 'none' } }}>
+            <Button
+              variant="text"
+              color="primary"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+              sx={{ minWidth: '30px', p: '4px' }}
+            >
+              <MenuIcon />
+            </Button>
+
+
+
+            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+              <Box
+                sx={{
+                  minWidth: '60dvw',
+                  p: 2,
+                  backgroundColor: 'background.paper',
+                  flexGrow: 1,
+                }}
               >
-                Sign up
-              </Button>
-            </Box>
-            <Box sx={{ display: { sm: '', md: 'none' } }}>
-              <Button
-                variant="text"
-                color="primary"
-                aria-label="menu"
-                onClick={toggleDrawer(true)}
-                sx={{ minWidth: '30px', p: '4px' }}
-              >
-                <MenuIcon />
-              </Button>
-              <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
                 <Box
                   sx={{
-                    minWidth: '60dvw',
-                    p: 2,
-                    backgroundColor: 'background.paper',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'end',
                     flexGrow: 1,
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'end',
-                      flexGrow: 1,
-                    }}
-                  >
-                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-                  </Box>
-                  <MenuItem onClick={() => scrollToSection('Home')}>
-                    Home
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('Movies')}>
-                    Movies
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('Shows')}>
-                    Shows
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('Hire Me')}>
-                    Hire Me
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('Hire Me')}>Hire Me</MenuItem>
-                  <Divider />
-                  <MenuItem>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      component="a"
-                      href="/material-ui/getting-started/templates/sign-up/"
-                      target="_blank"
-                      sx={{ width: '100%' }}
-                    >
-                      Sign up
-                    </Button>
-                  </MenuItem>
-                  <MenuItem>
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      component="a"
-                      href="/material-ui/getting-started/templates/sign-in/"
-                      target="_blank"
-                      sx={{ width: '100%' }}
-                    >
-                      Sign in
-                    </Button>
-                  </MenuItem>
+                  <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
                 </Box>
-              </Drawer>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </div>
+                <MenuItem onClick={() => scrollToSection('Home')}>
+                  Home
+                </MenuItem>
+                <MenuItem onClick={() => scrollToSection('Movies')}>
+                  Movies
+                </MenuItem>
+                <MenuItem onClick={() => scrollToSection('Shows')}>
+                  Shows
+                </MenuItem>
+                <MenuItem onClick={() => scrollToSection('Hire Me')}>
+                  Hire Me
+                </MenuItem>
+
+                <Divider />
+                <MenuItem>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    component="a"
+                    href="/material-ui/getting-started/templates/sign-up/"
+                    target="_blank"
+                    sx={{ width: '100%' }}
+                  >
+                    Sign up
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    component="a"
+                    href="/material-ui/getting-started/templates/sign-in/"
+                    target="_blank"
+                    sx={{ width: '100%' }}
+                  >
+                    Sign in
+                  </Button>
+                </MenuItem>
+              </Box>
+            </Drawer>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+    </div >
   );
 }
 

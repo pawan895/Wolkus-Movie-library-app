@@ -21,7 +21,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" mt={1}>
       {'Copyright © '}
-      <Link href="https://mui.com/">Sitemark&nbsp;</Link>
+      <Link href="https://pawandevelops.me/">Pawankumar B&nbsp;</Link>
       {new Date().getFullYear()}
     </Typography>
   );
@@ -56,14 +56,8 @@ export default function Footer() {
           }}
         >
           <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
-            <Box sx={{ ml: '-15px' }}>
-              <img
-                src={
-                  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg'
-                }
-                style={logoStyle}
-                alt="logo of sitemark"
-              />
+            <Box sx={{ ml: '-4px' }}>
+              <Typography variant="h4" fontWeight={600} gutterBottom>Wolkus</Typography>
             </Box>
             <Typography variant="body2" fontWeight={600} gutterBottom>
               Newsletter
@@ -191,23 +185,17 @@ export default function Footer() {
         >
           <IconButton
             color="inherit"
-            href="https://github.com/mui"
+            href="https://github.com/pawan895"
             aria-label="GitHub"
             sx={{ alignSelf: 'center' }}
           >
             <FacebookIcon />
           </IconButton>
+          
+         
           <IconButton
             color="inherit"
-            href="https://twitter.com/MaterialUI"
-            aria-label="X"
-            sx={{ alignSelf: 'center' }}
-          >
-            <TwitterIcon />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            href="https://www.linkedin.com/company/mui/"
+            href="https://www.linkedin.com/in/pawankumar-b-482728184/"
             aria-label="LinkedIn"
             sx={{ alignSelf: 'center' }}
           >

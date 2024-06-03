@@ -16,7 +16,7 @@ function SearchMovies(props) {
             try {
                 const response = await OmdbService.searchMovies(props.search); // Initial fetch
                 setMovies(response.movies);
-                setVisibleMovies(response.movies.slice(0, 5));
+                setVisibleMovies(response.movies.slice(0, 6));
             } catch (error) {
                 console.error(error);
                 // Handle error (display error message, etc.)
@@ -35,18 +35,27 @@ function SearchMovies(props) {
             });
 
             const newStartIndex = Math.max(0, Math.floor((movieContainerRef.current.scrollLeft + scrollAmount) / 200)); // Adjust the movie card width
-            setVisibleMovies(movies.slice(newStartIndex, newStartIndex + 5));
+            setVisibleMovies(movies.slice(newStartIndex, newStartIndex + 6));
         }
     };
 
     return (
         <>
             <Typography variant="h4" component="h4" gutterBottom sx={{
-                paddingTop: 4,
-                paddingBottom: 2
+                fontSize: 24,
+                paddingTop: 2,
+                
             }}>
                 {props.search} Movies
             </Typography>
+            <hr style={{
+                color: '#000000',
+                backgroundColor: '#000000',
+                height: 1,
+                borderColor: '#000000',
+                width: '100%',
+                marginBottom: 20,
+            }}/>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Button onClick={() => handleScroll('left')}>
                     <ArrowBackIosIcon />

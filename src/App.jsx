@@ -15,7 +15,10 @@ import Divider from '@mui/material/Divider';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import Hero from './sections/Hero';
 import SearchMovies from './components/SearchMovies';
+import { AuthContextProvider } from './context/AuthContext'
 import Footer from './sections/Footer';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -29,25 +32,7 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
         bottom: 24,
       }}
     >
-      {/* <ToggleButtonGroup
-        color="primary"
-        exclusive
-        value={showCustomTheme}
-        onChange={toggleCustomTheme}
-        aria-label="Platform"
-        sx={{
-          backgroundColor: 'background.default',
-          '& .Mui-selected': {
-            pointerEvents: 'none',
-          },
-        }}
-      >
-        <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-          Custom theme
-        </ToggleButton>
-        <ToggleButton value={false}>Material Design 2</ToggleButton>
-      </ToggleButtonGroup> */}
+
     </Box>
   );
 }
@@ -66,7 +51,8 @@ export default function App() {
 
 
   return (
-    <ThemeProvider theme={LPtheme}>
+    <AuthContextProvider>
+       <ThemeProvider theme={LPtheme}>
       <CssBaseline />
       {/* <Container> */}
         <AppBar mode={mode} toggleColorMode={toggleColorMode} />
@@ -85,9 +71,15 @@ export default function App() {
 
         </Container>
 
+
         <Footer />
 
       {/* </Container> */}
+      <ToastContainer />
     </ThemeProvider>
+
+
+    </AuthContextProvider>
+   
   );
 }
