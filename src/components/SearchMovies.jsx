@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, useMediaQuery, useTheme } from '@mui/material';
 import MovieCard from './MovieCard';
 import PropTypes from 'prop-types';
 import OmdbService from '../services/OmdbService.js';
@@ -10,13 +10,18 @@ function SearchMovies(props) {
     const [movies, setMovies] = useState([]);
     const [visibleMovies, setVisibleMovies] = useState([]);
     const movieContainerRef = useRef(null);
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+
+    const numVisibleMovies = isSmallScreen ? 2 : isMediumScreen ? 4 : 6;
 
     useEffect(() => {
         const fetchMovies = async () => {
             try {
                 const response = await OmdbService.searchMovies(props.search); // Initial fetch
                 setMovies(response.movies);
-                setVisibleMovies(response.movies.slice(0, 6));
+                setVisibleMovies(response.movies.slice(0, numVisibleMovies));
             } catch (error) {
                 console.error(error);
                 // Handle error (display error message, etc.)
@@ -24,7 +29,7 @@ function SearchMovies(props) {
         };
 
         fetchMovies();
-    }, [props.search]);
+    }, [props.search, numVisibleMovies]);
 
     const handleScroll = (direction) => {
         if (movieContainerRef.current) {
@@ -35,15 +40,17 @@ function SearchMovies(props) {
             });
 
             const newStartIndex = Math.max(0, Math.floor((movieContainerRef.current.scrollLeft + scrollAmount) / 200)); // Adjust the movie card width
-            setVisibleMovies(movies.slice(newStartIndex, newStartIndex + 6));
+            setVisibleMovies(movies.slice(newStartIndex, newStartIndex + numVisibleMovies));
         }
     };
 
     return (
         <>
-            <Typography variant="h4" component="h4" gutterBottom sx={{
+            <Typography variant="h5" component="h5" gutterBottom sx={{
+              
+                p:1,
                 fontSize: 24,
-                paddingTop: 2,
+            
                 
             }}>
                 {props.search} Movies
@@ -56,7 +63,7 @@ function SearchMovies(props) {
                 width: '100%',
                 marginBottom: 20,
             }}/>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center'}}>
                 <Button onClick={() => handleScroll('left')}>
                     <ArrowBackIosIcon />
                 </Button>

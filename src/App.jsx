@@ -19,6 +19,7 @@ import { AuthContextProvider } from './context/AuthContext'
 import Footer from './sections/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import MovieList from './components/MovieList';
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -63,11 +64,12 @@ export default function App() {
             mx: 'auto',
           }
         }>
-          
+          <MovieList />
           <SearchMovies search = "Trending"/>
           <SearchMovies search = "Romantic"/>
           <SearchMovies search = "Horror"/>
           <SearchMovies search = "Comedy"/>
+
 
         </Container>
 
