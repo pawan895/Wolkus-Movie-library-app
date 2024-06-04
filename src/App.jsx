@@ -50,9 +50,7 @@ export default function App() {
 
   return (
     <AuthContextProvider>
-      <ThemeProvider theme={LPtheme}>
-        <CssBaseline />
-        <ToastContainer
+      <ToastContainer
           position="top-center"
           autoClose={5000}
           hideProgressBar={false}
@@ -64,6 +62,9 @@ export default function App() {
           pauseOnHover
         />
 
+      <ThemeProvider theme={LPtheme}>
+        <CssBaseline />
+        
         <AppBar mode={mode} toggleColorMode={toggleColorMode} />
 
         <Box sx={{ width: '100%' }}>
