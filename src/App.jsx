@@ -14,14 +14,13 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Divider from '@mui/material/Divider';
 import Hero from './sections/Hero';
 import SearchMovies from './components/SearchMovies';
-import { AuthContextProvider } from './context/AuthContext'
+import { AuthContextProvider } from './context/AuthContext';
 import Footer from './sections/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import MovieList from './components/MovieList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Lists from './sections/Lists';
-
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -35,9 +34,27 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
         bottom: 24,
       }}
     >
+      <ToggleButtonGroup
+        value={showCustomTheme}
+        exclusive
+        onChange={toggleCustomTheme}
+        aria-label="custom theme toggle"
+      >
+        <ToggleButton value="light" aria-label="light mode">
+          Light
+        </ToggleButton>
+        <ToggleButton value="dark" aria-label="dark mode">
+          Dark
+        </ToggleButton>
+      </ToggleButtonGroup>
     </Box>
   );
 }
+
+ToggleCustomTheme.propTypes = {
+  showCustomTheme: PropTypes.bool.isRequired,
+  toggleCustomTheme: PropTypes.func.isRequired,
+};
 
 export default function App() {
   const [mode, setMode] = React.useState('dark');
@@ -48,23 +65,27 @@ export default function App() {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
+  const toggleCustomTheme = () => {
+    setShowCustomTheme((prev) => !prev);
+  };
+
   return (
     <AuthContextProvider>
-      <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-
+       <ToastContainer 
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+       
+       />
       <ThemeProvider theme={LPtheme}>
         <CssBaseline />
-        
+
         <AppBar mode={mode} toggleColorMode={toggleColorMode} />
 
         <Box sx={{ width: '100%' }}>
@@ -80,6 +101,7 @@ export default function App() {
                   <SearchMovies search="Horror" />
                   <SearchMovies search="Comedy" />
                 </Container>
+                <ToggleCustomTheme showCustomTheme={showCustomTheme} toggleCustomTheme={toggleCustomTheme} />
               </>
             } />
           </Routes>
@@ -87,6 +109,7 @@ export default function App() {
 
         <Footer />
       </ThemeProvider>
+     
     </AuthContextProvider>
   );
 }

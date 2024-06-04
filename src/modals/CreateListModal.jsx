@@ -137,7 +137,7 @@ export default function CreateListModal({ open, onClose }) {
           )}
         </Box>
       </Modal>
-      <ToastContainer position="bottom-right" />
+      
     </>
   );
 }
