@@ -12,6 +12,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "next",
+    "axios": "^1.7.2",
     "firebase": "^10.12.2",
     "react": "latest",
     "react-dom": "latest",
