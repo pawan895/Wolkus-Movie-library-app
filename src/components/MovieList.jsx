@@ -5,17 +5,30 @@ import MovieIcon from '@mui/icons-material/Movie';
 import { UserAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import CreateListModal from '../modals/CreateListModal';
+import MovieListModal from '../modals/MovieListModal';
+import { Movie } from '@mui/icons-material';
 
 
 const MovieList = () => {
     const { user } = UserAuth();
     const [isCreateListOpen, setIsCreateListOpen] = React.useState(false);
+    const [isExploreListOpen, setIsExploreListOpen] = React.useState(false);
 
     const handleCreateListClick = () => {
-        if(!user) toast.error('Please sign in to create a list');
+        if(!user){
+            toast.error('Please sign in to create a list');
+
+        }else{
+            setIsCreateListOpen(true);
+        }
         console.log('Create List Clicked');
-        setIsCreateListOpen(true);
+        // setIsCreateListOpen(true);
     }
+    const handleExploreListClick = () => {
+        console.log('Explore List Clicked');
+        setIsExploreListOpen(true);
+    }
+
     return (
         <div>
             <Typography variant="h5" component="h4" sx={{
@@ -70,11 +83,16 @@ const MovieList = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     transition: 'transform 0.3s ease-in-out',
+                    
                     '&:hover': {
                         transform: 'scale(1.1)',
                         cursor: 'pointer',
-                    }
-                }}>
+                    },
+
+                    
+                }}
+                onClick={handleExploreListClick}
+                >
                     <CardContent sx={{ textAlign: 'center' }}>
                         <MovieIcon sx={{ fontSize: 40, mb: 1 }} />
                         <Typography variant="h5" component="div">
@@ -84,6 +102,8 @@ const MovieList = () => {
                 </Card>
             </Box>
             <CreateListModal  open={isCreateListOpen} onClose={() => setIsCreateListOpen(false)} />
+            <MovieListModal open={isExploreListOpen} onClose={() => setIsExploreListOpen(false)} />
+
         </div>
     );
 };

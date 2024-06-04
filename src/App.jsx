@@ -19,6 +19,9 @@ import Footer from './sections/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import MovieList from './components/MovieList';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Lists from './sections/Lists';
+
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -52,47 +55,50 @@ export default function App() {
 
   return (
     <AuthContextProvider>
-       <ToastContainer
-      position="top-center"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      />
-      
-       <ThemeProvider theme={LPtheme}>
-      <CssBaseline />
-      {/* <Container> */}
-        <AppBar mode={mode} toggleColorMode={toggleColorMode} />
-        <Hero />
-        <Container sx={
-          {
-            width: '90%',
-            mx: 'auto',
-          }
-        }>
-          <MovieList />
-          <SearchMovies search = "Trending"/>
-          <SearchMovies search = "Romantic"/>
-          <SearchMovies search = "Horror"/>
-          <SearchMovies search = "Comedy"/>
 
+
+      <ThemeProvider theme={LPtheme}>
+        <CssBaseline />
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
+        <AppBar mode={mode} toggleColorMode={toggleColorMode} />
+
+
+        <Container sx={{ width: '90%', mx: 'auto' }}>
+
+          <Routes>
+            <Route path="/lists/:listId" element={<Lists />} />
+            <Route path="/" element={
+              <>
+                <Hero />
+                <MovieList />
+                <SearchMovies search="Trending" />
+                <SearchMovies search="Romantic" />
+                <SearchMovies search="Horror" />
+                <SearchMovies search="Comedy" />
+              </>
+            } />
+          </Routes>
 
         </Container>
 
-
         <Footer />
 
-      {/* </Container> */}
-      
-    </ThemeProvider>
+
+      </ThemeProvider>
 
 
     </AuthContextProvider>
-   
+
   );
 }

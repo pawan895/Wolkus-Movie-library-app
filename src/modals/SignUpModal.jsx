@@ -40,24 +40,27 @@ export default function SignInModal({ open, onClose }) {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        
         p: 4,
     };
 
     return (
         <Modal open={open} onClose={onClose}>
             <Box sx={modalStyle}>
-                <Typography variant="h5">Sign Up</Typography>
+                <Typography variant="h5" sx={{m:2}}>Sign Up</Typography>
                 <form onSubmit={handleSubmit}
                     style={{
+                        m: 2,
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: 5,
+                        gap: 4,
                         justifyContent: 'center',
                         alignItems: 'center',
+                        p:4,
                     }}
                 >
-                    <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <TextField label="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <TextField sx={{m:1}} label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <TextField sx={{m:1}} label="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
                     <Button type="submit" variant='contained' sx={{ m: 2 }}>Sign Up</Button>
                 </form>

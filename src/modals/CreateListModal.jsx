@@ -21,7 +21,7 @@ export default function CreateListModal({ open, onClose }) {
 
   useEffect(() => {
     if (listName && visibility === 'public') {
-      const url = `https://yourdomain.com/list/${encodeURIComponent(listName)}`;
+      const url = `https://wolkus-movie-library-app.vercel.app/${encodeURIComponent(listName)}`;
       setListUrl(url);
     } else {
       setListUrl('');

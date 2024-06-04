@@ -67,13 +67,18 @@ export default function SignInModal({ open, onClose }) {
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: 5,
+                        gap: 8,
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}
                 >
-                    
-                    <TextField label="Email" value={email} variant= "outlined" onChange={(e) => setEmail(e.target.value)} />
+                    <Box sx={{p:2, m:2, display: 'flex', flexDirection: 'column', color: '#959595'}}>
+                        <Typography variant="body">Mail: abc@gmail.com</Typography>
+                        <Typography variant="body">Password: 12345678</Typography>
+
+                    </Box>
+
+                    <TextField label="Email" value={email} variant="outlined" onChange={(e) => setEmail(e.target.value)} />
                     <TextField label="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
                     <Button type="submit" variant='contained' sx={{ m: 2 }}>Sign In</Button>
