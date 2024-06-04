@@ -35,28 +35,21 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
         bottom: 24,
       }}
     >
-
     </Box>
   );
 }
 
 export default function App() {
-
   const [mode, setMode] = React.useState('dark');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
-
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-
-
   return (
     <AuthContextProvider>
-
-
       <ThemeProvider theme={LPtheme}>
         <CssBaseline />
         <ToastContainer
@@ -73,32 +66,26 @@ export default function App() {
 
         <AppBar mode={mode} toggleColorMode={toggleColorMode} />
 
-
-        <Container sx={{ width: '90%', mx: 'auto' }}>
-
+        <Box sx={{ width: '100%' }}>
           <Routes>
             <Route path="/lists/:listId" element={<Lists />} />
             <Route path="/" element={
               <>
-                <Hero />
-                <MovieList />
-                <SearchMovies search="Trending" />
-                <SearchMovies search="Romantic" />
-                <SearchMovies search="Horror" />
-                <SearchMovies search="Comedy" />
+                <Hero sx={{ width: '100%' }} />
+                <Container sx={{ width: '90%', mx: 'auto' }}>
+                  <MovieList />
+                  <SearchMovies search="Trending" />
+                  <SearchMovies search="Romantic" />
+                  <SearchMovies search="Horror" />
+                  <SearchMovies search="Comedy" />
+                </Container>
               </>
             } />
           </Routes>
-
-        </Container>
+        </Box>
 
         <Footer />
-
-
       </ThemeProvider>
-
-
     </AuthContextProvider>
-
   );
 }

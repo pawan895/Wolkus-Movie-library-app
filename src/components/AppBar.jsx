@@ -61,6 +61,7 @@ function AppAppBar({ mode, toggleColorMode }) {
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
+    toast.warning('Use Create List to search for movies!');
     // You can trigger your search logic here
   };
 
