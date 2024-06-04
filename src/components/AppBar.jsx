@@ -37,11 +37,7 @@ function AppAppBar({ mode, toggleColorMode }) {
   const [signUpOpen, setSignUpOpen] = React.useState(false);
   const { user, logOut } = UserAuth();
 
-  // console.log(user.displayName);
-  if (user) {
-    console.log(user.displayName);
-  }
-
+ 
 
 
   const toggleDrawer = (newOpen) => () => {
@@ -79,12 +75,7 @@ function AppAppBar({ mode, toggleColorMode }) {
 
   const handleSignOut = async (logOut) => {
     try {
-
-
       await logOut();
-
-
-
     } catch (error) {
       console.log(error);
     }

@@ -6,7 +6,7 @@ const BASE_URL = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}`;
 const OmdbService = {
   async searchMovies(query, page = 1) {
     try {
-        console.log(query)
+        
       const response = await axios.get(BASE_URL+'&s='+query+'&page='+page);
         
       if (response.data.Response === 'True') {

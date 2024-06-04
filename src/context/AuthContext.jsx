@@ -86,7 +86,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, signUpwithMail,signInwithMail, user }}>
+    <AuthContext.Provider value={{ googleSignIn, logOut, signUpwithMail, signInwithMail, user  }}>
       {children}
     </AuthContext.Provider>
   );

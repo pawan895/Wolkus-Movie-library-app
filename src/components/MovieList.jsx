@@ -4,14 +4,17 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import MovieIcon from '@mui/icons-material/Movie';
 import { UserAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+import CreateListModal from '../modals/CreateListModal';
 
 
 const MovieList = () => {
     const { user } = UserAuth();
+    const [isCreateListOpen, setIsCreateListOpen] = React.useState(false);
 
     const handleCreateListClick = () => {
         if(!user) toast.error('Please sign in to create a list');
         console.log('Create List Clicked');
+        setIsCreateListOpen(true);
     }
     return (
         <div>
@@ -80,6 +83,7 @@ const MovieList = () => {
                     </CardContent>
                 </Card>
             </Box>
+            <CreateListModal  open={isCreateListOpen} onClose={() => setIsCreateListOpen(false)} />
         </div>
     );
 };
