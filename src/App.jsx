@@ -101,7 +101,7 @@ export default function App() {
                   <SearchMovies search="Horror" />
                   <SearchMovies search="Comedy" />
                 </Container>
-                <ToggleCustomTheme showCustomTheme={showCustomTheme} toggleCustomTheme={toggleCustomTheme} />
+                {/* <ToggleCustomTheme showCustomTheme={showCustomTheme} toggleCustomTheme={toggleCustomTheme} /> */}
               </>
             } />
           </Routes>
