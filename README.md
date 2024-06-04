@@ -14,14 +14,14 @@ Discover, organize, and share your favorite films with this user-friendly web ap
 
 ## Tech Stack
 
-- **Frontend:** React, React Router, Axios (for API calls)
+- **Frontend:** React, React Router, Axios (for API calls), Material UI
 - **Backend:** Firebase (Authentication, Firestore database, Cloud Functions - optional)
 - **API:** OMDb API (Open Movie Database)
 
 ## Architecture Diagram
 ```
 +--------------------+      +------------------+       +--------------+
-| React Frontend    |       | Firebase Backend |       | OMDb API     |
+| React Frontend     |      | Firebase Backend |       | OMDb API     |
 +--------------------+      +------------------+       +--------------+
 |                    |      |                  |       |              |
 | - Auth components  |<---->| - Auth Service   |       |              |
@@ -66,4 +66,26 @@ movie-library-app/
 ├── firebase.json                # Firebase configuration
 ├── package.json
 └── README.md
+```
+## Getting Started
+1. Clone the repo
+```
+git clone https://github.com/pawan895/Wolkus-Movie-library-app/
+```
+```
+cd Wolkus-Movie-library-app
+```
+2. Install the dependencies
+```
+npm install
+```
+4. Create a firebase project and obtain API Keys
+```
+Create a new poject and enable authentication & realtime database
+```
+6. Obtain OMDb API Keys
+7. Add all the key to .env file and place it in the root dir
+8. Run the deployment server
+```
+npm run dev
 ```
